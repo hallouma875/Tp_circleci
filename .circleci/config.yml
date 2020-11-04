@@ -75,8 +75,6 @@ jobs:
       - restore_cache:
           key: yarn-cache{{ checksum "yarn.lock" }} 
       - run: yarn install
-      - setup_remote_docker:
-          docker_layer_caching: true
       - run:
           name: Install Docker client
           command: |
