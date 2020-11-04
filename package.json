@@ -22,7 +22,12 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "format:check": "prettier --list-different \"src/**/*.ts\" \"test/**/*.ts\"",
-    "generate": "hygen"
+    "generate": "hygen",
+
+    "docker:build": "docker build -t ahlemfahem1/projectci:latest .",
+    "docker:login": "docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD",
+    "docker:push": "docker push ahlemfahem1/projectci:latest",
+    "ci:docker": "npm run docker:build && npm run docker:login && npm run docker:push"
   },
   "dependencies": {
     "@hapi/joi": "^16.1.5",
