@@ -87,7 +87,7 @@ jobs:
           DOCKERHUB_USERNAME=ahlemfahem1
           DOCKERHUB_PASSWORD=231993amira
           docker build -t ahlemfahem1/projectci:$TAG .
-          echo $DOCKER_PASS | winpty docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
+          echo $DOCKER_PASS | docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
           docker push ahlemfahem1/projectci:$TAG                   
 workflows:
   build:
