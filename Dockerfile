@@ -1,4 +1,4 @@
-FROM node:12
+FROM node
 WORKDIR /usr/app
 
 COPY package.json yarn.lock ./
@@ -10,3 +10,4 @@ EXPOSE 4000
 RUN yarn global add node-gyp && yarn install
 
 CMD ["yarn","start"]
+USER node
