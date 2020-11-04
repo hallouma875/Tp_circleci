@@ -43,9 +43,34 @@ jobs:
           key: yarn-cache{{ checksum "yarn.lock" }}
           paths:
             - ./node_modules
+  test-e2e:
+    docker:
+      - image: "circleci/node:12"
+      - image: circleci/postgres:9.6.2-alpine
+        environment:
+          - POSTGRES_USER=ahlemfahem
+          - POSTGRES_PASSWORD=admin
+          - POSTGRES_DB=projetCi
+    steps:
+      - checkout
+      - restore_cache:
+          key: yarn-cache{{ checksum "yarn.lock" }}      
+      - run:
+          command : yarn test:e2e  
+          environment : 
+            DATABASE_URL: postgres://ahlemfahem:admin@localhost:5432/projetCi
+            JWT_SECRET: hihi
+            API_PORT: 3000
+            API_HOST: localhost
+            API_PROTOCOL: http  
+      - save_cache:
+          key: yarn-cache{{ checksum "yarn.lock" }}
+          paths:
+            - ./node_modules           
 workflows:
   build:
     jobs:
       - "build"
       - "test"
       - "lint"
+      - "test-e2e"
