@@ -18,4 +18,33 @@ jobs:
           key: yarn-cache{{ checksum "yarn.lock" }}
           paths:
             - ./node_modules
+
+  tests:
+    docker:
+      - image: "circleci/node:12"
+    steps:
+      - checkout
+      - restore_cache:
+          key: yarn-cache{{ checksum "yarn.lock" }}
+      - run: 
+        name: test-ci
+        command: yarn test:ci
+      - save_cache:
+          key: yarn-cache{{ checksum "yarn.lock" }}
+          paths:
+            - ./node_modules
+  lint:
+    docker:
+      - image: "circleci/node:12"
+    steps:
+      - checkout
+      - restore_cache:
+          key: yarn-cache{{ checksum "yarn.lock" }}
+      - run: 
+        name: lint-ci
+        command: yarn lint && yarn format:check
+      - save_cache:
+          key: yarn-cache{{ checksum "yarn.lock" }}
+          paths:
+            - ./node_modules
         
