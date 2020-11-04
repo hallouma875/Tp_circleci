@@ -11,7 +11,9 @@ jobs:
       - checkout
       - restore_cache:
           key: yarn-cache{{ checksum "yarn.lock" }}
-      - run: yarn global add node-gyp && yarn install
+      - run: 
+          name : install-yarn
+          command : 'yarn global add node-gyp && yarn install'
       - save_cache:
           key: yarn-cache{{ checksum "yarn.lock" }}
           paths:
