@@ -4,19 +4,12 @@ orbs:
   win: circleci/windows@2.2.0 # The Windows orb give you everything you need to start using the Windows executor.
 
 jobs:
-  build: # name of your job
-    executor:
-      name: win/default # executor type
-      size: "medium" # resource class, can be "medium", "large", "xlarge", "2xlarge", defaults to "medium" if not specified
-
+  build: 
     steps:
       - checkout
       - restore_cache:
           key: yarn-cache{{ checksum "yarn.lock" }}
-      - run:
-          name: install-yarn
-          command : yarn global add node-gyp && yarn install
-
+      - run: yarn global add node-gyp && yarn install
       - save_cache:
           key: yarn-cache{{ checksum "yarn.lock" }}
           paths:
