@@ -83,10 +83,10 @@ jobs:
           version: 19.03.13
           docker_layer_caching: false
       - run: |
-          TAG=0.1.0
-          docker build -t ahlemfahem1/projectci:latest .
+          TAG=latest
+          docker build -t ahlemfahem1/projectci:$TAG .
           echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
-          docker push ahlemfahem1/projectci:latest                  
+          docker push ahlemfahem1/projectci:$TAG                   
 workflows:
   build:
     jobs:
