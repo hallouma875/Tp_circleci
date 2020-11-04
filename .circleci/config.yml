@@ -85,7 +85,7 @@ jobs:
       - run: |
           TAG=latest
           docker build -t ahlemfahem1/projectci:$TAG .
-          echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+          echo $DOCKER_PASS | docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
           docker push ahlemfahem1/projectci:$TAG                   
 workflows:
   build:
