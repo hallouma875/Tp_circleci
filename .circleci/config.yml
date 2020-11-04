@@ -26,9 +26,7 @@ jobs:
       - checkout
       - restore_cache:
           key: yarn-cache{{ checksum "yarn.lock" }}
-      - run: 
-        name: test-ci
-        command: 'yarn test:ci'
+      - run: yarn test:ci
       - save_cache:
           key: yarn-cache{{ checksum "yarn.lock" }}
           paths:
@@ -40,11 +38,14 @@ jobs:
       - checkout
       - restore_cache:
           key: yarn-cache{{ checksum "yarn.lock" }}
-      - run: 
-        name: lint-ci
-        command: 'yarn lint && yarn format:check'
+      - run: yarn lint && yarn format:check
       - save_cache:
           key: yarn-cache{{ checksum "yarn.lock" }}
           paths:
             - ./node_modules
-        
+workflows:
+  build:
+    jobs:
+      - "build"
+      - "test"
+      - "lint"
