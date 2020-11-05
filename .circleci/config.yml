@@ -88,17 +88,9 @@ jobs:
           DOCKERHUB_PASSWORD=231993amira
           docker build -t ahlemfahem1/projectci:$TAG .
           echo $DOCKER_PASS | docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
-          docker push ahlemfahem1/projectci:$TAG                   
-workflows:
-  build:
-    jobs:
-      - "build"
-      - "test"
-      - "lint"
-      - "test-e2e"
-      - "build_docker_file"
+          docker push ahlemfahem1/projectci:$TAG
 
-        doc:
+  doc_generate:
     docker:
       - image: "circleci/node:12"
     steps:
@@ -108,4 +100,16 @@ workflows:
       - run:
           command: yarn doc:build
       - store_artifacts:
-          path: ./doc-server
+          path: ./doc-server          
+
+workflows:
+  build:
+    jobs:
+      - "build"
+      - "test"
+      - "lint"
+      - "test-e2e"
+      - "build_docker_file"
+      - "doc_generate"
+
+
