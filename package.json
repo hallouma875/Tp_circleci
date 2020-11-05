@@ -2,7 +2,7 @@
   "name": "ci-tp",
   "version": "0.0.1",
   "description": "A CI tp for M1 III",
-  "author": "Nicolas Beaussart <nic.beaussart@gmail.com>",
+  "author": "AHLEM FAHEM <ahlem.fahem@lacatholille.fr>",
   "license": "MIT",
   "scripts": {
     "prebuild": "rimraf dist",
