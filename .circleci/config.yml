@@ -97,3 +97,15 @@ workflows:
       - "lint"
       - "test-e2e"
       - "build_docker_file"
+
+        doc:
+    docker:
+      - image: "circleci/node:12"
+    steps:
+      - checkout
+      - restore_cache:
+            key: yarn-cache{{ checksum "yarn.lock" }}
+      - run:
+          command: yarn doc:build
+      - store_artifacts:
+          path: ./doc-server
